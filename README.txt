@@ -1,5 +1,3 @@
-$Id: README.txt,v 1.1.2.1 2009/07/10 08:40:41 aronnovak Exp $
-
 Web Widgets
 ===========
 

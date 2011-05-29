@@ -1,5 +1,4 @@
 <?php
-// $Id: web_widgets.module,v 1.1.2.5 2010/06/24 21:44:22 yhahn Exp $
 /**
  * @file
  *   web_widgets module main. Contains the views api hook and theming functions.
@@ -18,10 +17,10 @@ function web_widgets_views_api() {
 /**
  * Implements hook_theme().
  */
-function web_widgets_theme() {
+function web_widgets_theme($existing, $type, $theme, $path) {
   $theme = array(
     'web_widgets_embed_code' => array(
-      'variables' => array('code' => NULL),
+      'variables' => array('code' => NULL, 'style' => NULL),
     ),
     'web_widgets_tracking_code' => array(
       'variables' => array('id' => NULL),
@@ -74,12 +73,13 @@ function web_widgets_get_styles() {
  * @return
  *   HTML that displays the widget embed code.
  */
-function web_widgets_render_embed_code($style, $path, $width, $height) {
+function web_widgets_render_embed_code($style, $variables) {
   require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
   // TODO Please change this theme call to use an associative array for the $variables parameter.
-  $code = theme('web_widgets_' . $style, $path, $width, $height);
+  $code = theme('web_widgets_' . $style, $variables);
+
   // TODO Please change this theme call to use an associative array for the $variables parameter.
-  return theme('web_widgets_embed_code', $code, $style);
+  return theme('web_widgets_embed_code', array('code' => $code, 'style' => $style));
 }
 
 /**
@@ -103,8 +103,12 @@ function web_widgets_render_widget($style, $content, $title, $add_target = TRUE)
     $content = _web_widgets_rewrite_anchors($content);
   }
   module_invoke_all('web_widgets_render_widget', $content, $title);
-  // TODO Please change this theme call to use an associative array for the $variables parameter.
-  return theme('web_widgets_' . $style . '_wrapper', $content, $title);
+
+  return theme('web_widgets_' . $style . '_wrapper', array(
+    'content' => $content,
+    'title' => $title,
+    'scripts' => array(),
+    'styles' => array()));
 }
 
 /**
@@ -180,11 +184,13 @@ function _web_widgets_add_attrib($matches) {
  * @return
  *   HTML that displays the widget embed code.
  */
-function theme_web_widgets_embed_code($code, $style) {
-  // TODO: Should this theme web_widgets_embed_code be declared in hook_theme()?
+function theme_web_widgets_embed_code($variables) {
+  $code = $variables['code'];
+  $style = $variables['style'];
+
   $styles = web_widgets_get_styles();
   $style_name = $styles[$style];
-
+  
   static $num = 0;
   $form = array(
     '#type' => 'textfield',

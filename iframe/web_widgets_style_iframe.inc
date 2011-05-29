@@ -27,6 +27,8 @@ function web_widgets_style_iframe() {
         'arguments' => array(
           'content' => NULL,
           'title' => NULL,
+          'scripts' => NULL,
+          'styles' => NULL
         ),
         'path' => drupal_get_path('module', 'web_widgets') . '/iframe',
       ),
@@ -60,8 +62,22 @@ function template_preprocess_web_widgets_iframe(&$variables) {
   $variables['script_url'] = $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'web_widgets') . '/iframe/web_widgets_iframe.js';
 }
 
-function template_preprocess_web_widgets_iframe_wrapper(&$vars) {
-  $vars['head'] = drupal_get_html_head();
-  $vars['styles'] = drupal_get_css();
-  $vars['scripts'] = drupal_get_js();
+function template_preprocess_web_widgets_iframe_wrapper(&$variables) {
+  dpm(func_get_args());
+  
+  $variables['head'] = drupal_get_html_head();
+  
+  if (!empty($variables['scripts'])) {
+    foreach($variables['scripts'] as $script) {
+      $scripts .= '<script type="text/javascript" src="' . $script . '"></script>';
+    }
+    $variables['scripts'] = $scripts;    
+  }
+
+  if (!empty($variables['styles'])) {
+    foreach($variables['scstylesripts'] as $style) {
+      $styles .= '<style type="text/css" media="all">@import url(' . $style . ')</style>';
+    }
+    $variables['styles'] = $styles;    
+  }  
 }

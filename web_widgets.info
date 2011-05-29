@@ -1,13 +1,6 @@
-; $Id: web_widgets.info,v 1.1.2.1 2010/02/19 19:53:19 diggersf Exp $
 name =  Web Widgets
 description = Create dynamic snippets of this site that users can copy and paste to their websites. Plays nice with Views module. See README.txt for more installation instructions.
 core = 7.x
-
-; Information added by drupal.org packaging script on 2010-10-26
-version = "6.x-1.4"
-core = 7.x
-project = "web_widgets"
-datestamp = "1288124443"
 
 
 files[] = views/web_widgets_plugin_display_web_widgets.inc
