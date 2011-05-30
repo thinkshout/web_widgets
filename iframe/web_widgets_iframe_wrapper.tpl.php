@@ -9,8 +9,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <?php print $head ?>
-    <?php print $styles ?>
-    <?php print $scripts ?>
+    <?php !empty($styles) ? print $styles : '' ?>
+    <?php !empty($scripts) ? print $scripts : '' ?>
     <title><?php print $title ?></title>
   </head>
   <body id="widget">

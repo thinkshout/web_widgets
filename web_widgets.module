@@ -97,7 +97,7 @@ function web_widgets_render_embed_code($style, $variables) {
  * @return
  *   HTML wrapped in style specific markup.
  */
-function web_widgets_render_widget($style, $content, $title, $add_target = TRUE) {
+function web_widgets_render_widget($style, $content, $title, $add_target = TRUE, $scripts = array(), $styles = array()) {
   require_once DRUPAL_ROOT . '/' . web_widgets_get_style_inc($style);
   if ($add_target === TRUE) {
     $content = _web_widgets_rewrite_anchors($content);
@@ -107,8 +107,9 @@ function web_widgets_render_widget($style, $content, $title, $add_target = TRUE)
   return theme('web_widgets_' . $style . '_wrapper', array(
     'content' => $content,
     'title' => $title,
-    'scripts' => array(),
-    'styles' => array()));
+    'scripts' => $scripts,
+    'styles' => $styles
+  ));
 }
 
 /**
@@ -201,6 +202,7 @@ function theme_web_widgets_embed_code($variables) {
     '#value' => $code,
     '#parents' => array('none'),
     '#maxlength' => FALSE,
+    '#attributes' => array('onclick' => 'this.focus(); this.select();')
   );
   if ($style == 'uwa') {
     $form['#type'] = 'item';
