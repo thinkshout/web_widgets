@@ -79,7 +79,7 @@ function template_preprocess_web_widgets_iframe_wrapper(&$variables) {
   if (!empty($variables['styles'])) {
     $styles = array();
     foreach($variables['styles'] as $style) {
-      $styles[] = '<style type="text/css" media="all">@import url(' . $style . ')</style>';
+      $styles[] = '<style type="text/css" media="all">@import url(' . $style . ');</style>';
     }
     $variables['styles'] = implode(' ', $styles);
   } 
