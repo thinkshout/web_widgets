@@ -52,11 +52,12 @@ function template_preprocess_web_widgets_iframe(&$variables) {
   }
   if (empty($variables['height'])) {
     $variables['height'] = 200;
-  }
+  }  
 
   $widgetcontext->width = $variables['width'];
   $widgetcontext->height = $variables['height'];
   $widgetcontext->widgetid = $variables['wid'];
+  $widgetcontext->scrolling = isset($variables['scrolling']) ? $variables['scrolling'] : 'auto';
 
   $variables['js_variables'] = drupal_json_encode($widgetcontext);
   $variables['script_url'] = $GLOBALS['base_url'] . '/' . drupal_get_path('module', 'web_widgets') . '/iframe/web_widgets_iframe.js';

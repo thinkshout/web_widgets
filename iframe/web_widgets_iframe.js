@@ -5,9 +5,10 @@ if (document.getElementsByTagName && document.createElement && document.createTe
     src: widgetContext['url'],
     wid: widgetContext['widgetid'],
     width: widgetContext['width'],
-    height: widgetContext['height']
+    height: widgetContext['height'],
+    scrolling: widgetContext['scrolling']
   };
-  
+
   for (var i in DrupalEmbed) {
     if (!DrupalEmbed[i]['processed']) {
       DrupalEmbed[i]['processed'] = true;
@@ -30,6 +31,7 @@ if (document.getElementsByTagName && document.createElement && document.createTe
       iframe.setAttribute('width', DrupalEmbed[i].width);
       iframe.setAttribute('height', DrupalEmbed[i].height);
       iframe.setAttribute('src', DrupalEmbed[i].src);
+      iframe.setAttribute('scrolling', DrupalEmbed[i].scrolling);
       iframe.onload = function () {
         var iframeDocument = this.contentDocument ? this.contentDocument : (this.contentWindow ? this.contentWindow.document : null);
       }
