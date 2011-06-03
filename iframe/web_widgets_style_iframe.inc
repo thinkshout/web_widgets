@@ -46,14 +46,13 @@ function template_preprocess_web_widgets_iframe(&$variables) {
 
   // Create Javascript variables
   $widgetcontext = new stdClass();
-  $widgetcontext->url = $variables['path'];
   if (empty($variables['width'])) {
     $variables['width'] = 200;
   }
   if (empty($variables['height'])) {
     $variables['height'] = 200;
   }  
-
+  $widgetcontext->url = $variables['path'] . '?width=' . $variables['width'] . '&height=' . $variables['height'];
   $widgetcontext->width = $variables['width'];
   $widgetcontext->height = $variables['height'];
   $widgetcontext->widgetid = $variables['wid'];
