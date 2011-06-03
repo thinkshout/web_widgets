@@ -203,7 +203,8 @@ function theme_web_widgets_embed_code($variables) {
     '#parents' => array('none'),
     '#maxlength' => FALSE,
     '#attributes' => array('onclick' => 'this.focus(); this.select();'),
-    '#cols' => 30
+    '#cols' => 30,
+    '#rows' => 5
   );
   if ($style == 'uwa') {
     $form['#type'] = 'item';
