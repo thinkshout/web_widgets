@@ -194,7 +194,7 @@ function theme_web_widgets_embed_code($variables) {
   
   static $num = 0;
   $form = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Embed code'),
     '#description' => t('Copy and paste this code to your website.'),
     '#id' => 'web_widgets_' . $num++,
@@ -202,7 +202,8 @@ function theme_web_widgets_embed_code($variables) {
     '#value' => $code,
     '#parents' => array('none'),
     '#maxlength' => FALSE,
-    '#attributes' => array('onclick' => 'this.focus(); this.select();')
+    '#attributes' => array('onclick' => 'this.focus(); this.select();'),
+    '#cols' => 30
   );
   if ($style == 'uwa') {
     $form['#type'] = 'item';
