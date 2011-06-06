@@ -32,9 +32,6 @@ if (document.getElementsByTagName && document.createElement && document.createTe
       iframe.setAttribute('height', DrupalEmbed[i].height);
       iframe.setAttribute('src', DrupalEmbed[i].src);
       iframe.setAttribute('scrolling', DrupalEmbed[i].scrolling);
-      iframe.onload = function () {
-        var iframeDocument = this.contentDocument ? this.contentDocument : (this.contentWindow ? this.contentWindow.document : null);
-      }
       
       script.parentNode.insertBefore(iframe, script);
     }
